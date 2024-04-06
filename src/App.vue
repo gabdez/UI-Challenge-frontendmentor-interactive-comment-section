@@ -3,6 +3,7 @@
     <v-container class="d-flex flex-column align-center" fluid>
       <commentCard v-for="comment in appStore.data" :key="comment.id" :data="comment" />
       <sendComment />
+      <deleteModal />
     </v-container>
   </v-app>
 </template>
@@ -14,6 +15,7 @@ import { onMounted } from "vue";
 import { useAppStore } from "./stores/app";
 import commentCard from "@/components/comment-card.vue"
 import sendComment from "@/components/send-comment-card.vue"
+import deleteModal from "@/components/delete-modal.vue"
 
 const appStore = useAppStore();
 

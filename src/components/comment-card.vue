@@ -31,11 +31,25 @@
                             <span class="pl-3 text-grey-darken-1">{{ data.createdAt }}</span>
                         </div>
                         <!-- Actions -->
-                        <div>
+                        <!-- TODO implement delete/edit button -->
+                        <div v-if="data.user.username !== appStore.currentUser.username">
                             <v-btn class="font-weight-black-custom" color="moderateBlue" variant="text" size="small">
                                 <v-icon class="text-moderateBlue pr-2" variant="plain" size="large" density="compact"
                                     icon="mdi-reply" />
                                 Reply
+                            </v-btn>
+                        </div>
+                        <div v-else>
+                            <v-btn class="font-weight-black-custom" color="softRed" variant="text" size="small"
+                                @click="deleteModalStore.showModal(data.id)">
+                                <v-icon class="text-softRed pr-2" variant="plain" size="large" density="compact"
+                                    icon="mdi-delete" />
+                                Delete
+                            </v-btn>
+                            <v-btn class="font-weight-black-custom" color="moderateBlue" variant="text" size="small">
+                                <v-icon class="text-moderateBlue pr-2" variant="plain" size="large" density="compact"
+                                    icon="mdi-pencil" />
+                                Edit
                             </v-btn>
                         </div>
                     </div>
@@ -58,11 +72,13 @@
 <script setup lang="ts">
 import type { Commentary } from '@/models/comments';
 import { useAppStore } from "@/stores/app";
+import { useDeleteModalStore } from "@/stores/delete-modal";
 
 const props = defineProps<{
     data: Commentary
 }>();
 const appStore = useAppStore();
+const deleteModalStore = useDeleteModalStore();
 
 const toggleScore = (toggle: boolean) => {
     const comment = appStore.data.find(c => c.id === props.data.id);
