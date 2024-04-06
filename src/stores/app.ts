@@ -13,5 +13,12 @@ export const useAppStore = defineStore('app', () => {
     }
   };
 
-  return { currentUser, data, deleteComment }
+  const updateCommentContent = (id: Number, newContent: string) => {
+    const i = data.value.findIndex(d => d.id === id);
+    if (i !== -1) {
+      data.value[i].content = newContent;
+    }
+  };
+
+  return { currentUser, data, deleteComment, updateCommentContent }
 })

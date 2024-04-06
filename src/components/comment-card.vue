@@ -41,12 +41,13 @@
                         </div>
                         <div v-else>
                             <v-btn class="font-weight-black-custom" color="softRed" variant="text" size="small"
-                                @click="deleteModalStore.showModal(data.id)">
+                                :disabled="editingMode" @click="deleteModalStore.showModal(data.id)">
                                 <v-icon class="text-softRed pr-2" variant="plain" size="large" density="compact"
                                     icon="mdi-delete" />
                                 Delete
                             </v-btn>
-                            <v-btn class="font-weight-black-custom" color="moderateBlue" variant="text" size="small">
+                            <v-btn class="font-weight-black-custom" color="moderateBlue" variant="text" size="small"
+                                :disabled="editingMode" @click="editingMode = true">
                                 <v-icon class="text-moderateBlue pr-2" variant="plain" size="large" density="compact"
                                     icon="mdi-pencil" />
                                 Edit
@@ -56,8 +57,14 @@
 
                     <!-- comment content -->
                     <!-- TODO add people in which it reply with @ inside the content - ex @ramsesmiron -->
-                    <div class="text-grey-darken-1">{{ data.content }}</div>
+                    <div v-if="!editingMode" class="text-grey-darken-1">{{ data.content }}</div>
+                    <v-textarea v-else v-model="updatedContent" placeholder="Add a comment..." rows="3" hide-details
+                        variant="outlined" auto-grow />
                 </v-col>
+            </v-row>
+            <v-row v-if="editingMode" class="mx-0" justify="end">
+                <v-btn class="text-uppercase rounded-lg px-3" variant="flat" color="moderateBlue"
+                    @click="updateComment">Update</v-btn>
             </v-row>
         </v-container>
     </v-sheet>
@@ -73,6 +80,7 @@
 import type { Commentary } from '@/models/comments';
 import { useAppStore } from "@/stores/app";
 import { useDeleteModalStore } from "@/stores/delete-modal";
+import { ref } from 'vue';
 
 const props = defineProps<{
     data: Commentary
@@ -80,11 +88,19 @@ const props = defineProps<{
 const appStore = useAppStore();
 const deleteModalStore = useDeleteModalStore();
 
+const editingMode = ref(false);
+const updatedContent = ref(props.data.content);
+
 const toggleScore = (toggle: boolean) => {
     const comment = appStore.data.find(c => c.id === props.data.id);
     if (comment) {
         const newScore = toggle ? -1 : +1;
         comment.score = comment.score - newScore;
     }
+}
+
+const updateComment = () => {
+    appStore.updateCommentContent(props.data.id, updatedContent.value);
+    editingMode.value = false;
 }
 </script>
