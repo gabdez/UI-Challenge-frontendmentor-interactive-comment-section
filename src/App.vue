@@ -17,8 +17,6 @@ import sendComment from "@/components/send-comment-card.vue"
 
 const appStore = useAppStore();
 
-
-
 onMounted(async () => {
   const response = await fetch("./src/assets/data.json");
   const file = await response.json();
