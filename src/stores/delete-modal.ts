@@ -2,7 +2,7 @@ import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useDeleteModalStore = defineStore('deleteModal', () => {
-  const visibility: Ref<Boolean> = ref(false);
+  const visibility: Ref<boolean> = ref(false);
   const idToDelete: Ref<Number> = ref(0);
 
   const showModal = (id: Number) => {
