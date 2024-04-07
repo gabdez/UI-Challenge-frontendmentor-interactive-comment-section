@@ -36,7 +36,8 @@ const sendComment = () => {
     const data = appStore.data;
     const currentUser = appStore.currentUser;
     const lastComment = data.sort((a, b) => b.id - a.id)[0] || 0;
-    const id = lastComment.id + 1;
+    const random = Math.floor(Math.random() * 100);
+    const id = lastComment.id + random;
     const date = new Date();
     data.unshift(
         {
