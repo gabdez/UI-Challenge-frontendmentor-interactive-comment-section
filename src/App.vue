@@ -20,7 +20,7 @@ import deleteModal from "@/components/delete-modal.vue"
 const appStore = useAppStore();
 
 onMounted(async () => {
-  const response = await fetch("./src/assets/data.json");
+  const response = await fetch("./data.json");
   const file = await response.json();
   console.log(file);
   appStore.currentUser = file.currentUser;
