@@ -8,10 +8,19 @@ export const useAppStore = defineStore('app', () => {
   const data: Ref<Commentary[]> = ref([]);
 
   const deleteComment = (idToDelete: number) => {
-    const i = data.value.findIndex(d => d.id === idToDelete);
-    if (i !== -1) {
-      data.value.splice(i, 1);
+    const findAndDelete = (commentIdToDelete: number, arr: Commentary[]) => {
+      for (let index = 0; index < arr.length; index++) {
+        const c = arr[index];
+        if (c.id === idToDelete) {
+          arr.splice(index, 1);
+          break;
+        }
+        else if (c.replies) {
+          findAndDelete(commentIdToDelete, c.replies)
+        }
+      }
     }
+    findAndDelete(idToDelete, data.value);
   };
 
   const updateCommentContent = (id: number, newContent: string) => {
