@@ -1,6 +1,6 @@
 <template>
     <v-sheet min-height="150" max-width="800px" class="w-100 rounded-lg pa-2 ma-2 mb-8">
-        <v-container>
+        <v-container class="pa-0 pa-md-4">
             <v-row>
                 <!-- Left section - +/- button -->
                 <v-col cols="1" class="align-center">

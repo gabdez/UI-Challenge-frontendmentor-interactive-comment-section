@@ -20,7 +20,6 @@ const appStore = useAppStore();
 onMounted(async () => {
   const response = await fetch("./data.json");
   const file = await response.json();
-  console.log(file);
   appStore.currentUser = file.currentUser;
   appStore.data = file.comments;
 });

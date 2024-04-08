@@ -1,6 +1,6 @@
 <template>
     <v-sheet min-height="150" max-width="800px" class="w-100 rounded-lg pa-2 my-2">
-        <v-container>
+        <v-container class="pa-1 pa-md-4">
             <v-row>
                 <!-- Left section - +/- button -->
                 <v-col cols="1" class="align-center">
@@ -120,7 +120,6 @@ const updatedContent = ref(props.comment.content);
 
 const toggleScore = (toggle: boolean) => {
     const comment = findComment(props.comment.id, appStore.data);
-    console.log(comment);
     if (comment) {
         const newScore = toggle ? -1 : +1;
         comment.score = comment.score - newScore;
