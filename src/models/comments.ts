@@ -7,7 +7,7 @@ export interface Commentary {
     content: string;
     createdAt: string;
     score: number;
-    replies?: Commentary[];
+    replies: Commentary[];
     replyingTo?: string
     user: User;
-}
+}  

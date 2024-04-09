@@ -42,7 +42,8 @@
               "png": "./assets/images/avatars/image-ramsesmiron.png"
             },
             "username": "ramsesmiron"
-          }
+          },
+          "replies": []
         },
         {
           "id": 4,
@@ -55,7 +56,8 @@
               "png": "./assets/images/avatars/image-juliusomo.png"
             },
             "username": "juliusomo"
-          }
+          },
+          "replies": []
         }
       ]
     }

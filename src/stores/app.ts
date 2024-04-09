@@ -31,23 +31,25 @@ export const useAppStore = defineStore('app', () => {
   };
 
   const replyComment = (rootCommentaryId: number, content: string) => {
-    const rootCommentIndex = data.value.findIndex(a => a.id === rootCommentaryId);
-    if (rootCommentIndex !== -1) {
-      const rootCommentary = data.value[rootCommentIndex]
+    const comment = findComment(rootCommentaryId, data.value);
+    if (comment) {
       const random = Math.floor(Math.random() * 10000);
-      const id = rootCommentary.id + random;
+      const id = comment.id + random;
       const date = new Date();
       const reply: Commentary = {
         id,
         createdAt: date.toDateString(),
         replies: [],
         content,
-        replyingTo: rootCommentary.user.username,
+        replyingTo: comment.user.username,
         score: 0,
         user: currentUser.value,
       };
-      rootCommentary.replies?.push(reply);
+      console.log(comment);
+      comment.replies?.push(reply);
+      console.log(comment);
     }
+    console.log("------", comment);
   };
 
   return { currentUser, data, deleteComment, updateCommentContent, replyComment }

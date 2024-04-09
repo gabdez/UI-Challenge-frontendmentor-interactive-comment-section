@@ -23,13 +23,7 @@
     </v-sheet>
 </template>
 
-<style scoped>
-@media (max-width: 960px) {
-    .flex-basis-under-md-100 {
-        flex-basis: 100%;
-    }
-}
-</style>
+<style scoped></style>
 
 <script setup lang="ts">
 import { ref } from "vue";
